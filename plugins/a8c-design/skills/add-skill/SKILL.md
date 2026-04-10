@@ -1,13 +1,13 @@
 ---
 name: add-skill
-description: Add a new skill to the design plugin. Use when you've built a Claude Code skill and want to contribute it to the shared Automattic design plugin — handles finding the repo, creating a branch, scaffolding files, updating metadata, and opening a PR.
+description: Add a new skill to the a8c-design plugin. Use when you've built a Claude Code skill and want to contribute it to the shared Automattic a8c-design plugin — handles finding the repo, creating a branch, scaffolding files, updating metadata, and opening a PR.
 argument-hint: "[path to your SKILL.md, or describe what your skill does]"
 allowed-tools: Bash, Read, Write, Edit, Glob, AskUserQuestion
 ---
 
 # Add Skill
 
-Contribute a new skill to the shared `design` plugin. This workflow handles the full contribution: finding the repo, branching, scaffolding, updating all metadata, and opening a draft PR.
+Contribute a new skill to the shared `a8c-design` plugin. This workflow handles the full contribution: finding the repo, branching, scaffolding, updating all metadata, and opening a draft PR.
 
 ---
 
@@ -61,9 +61,9 @@ If any validation fails, explain the issue and ask the user to fix it before con
 Check these locations in order:
 
 ```bash
-ls ~/Documents/GitHub/design-skills/plugins/design/.claude-plugin/plugin.json 2>/dev/null
-ls ~/Source/design-skills/plugins/design/.claude-plugin/plugin.json 2>/dev/null
-ls ~/code/design-skills/plugins/design/.claude-plugin/plugin.json 2>/dev/null
+ls ~/Documents/GitHub/design-skills/plugins/a8c-design/.claude-plugin/plugin.json 2>/dev/null
+ls ~/Source/design-skills/plugins/a8c-design/.claude-plugin/plugin.json 2>/dev/null
+ls ~/code/design-skills/plugins/a8c-design/.claude-plugin/plugin.json 2>/dev/null
 ```
 
 **If found:** Tell the user — "Found the repo at `<path>`. Using that." and set `REPO` to the repo root.
@@ -85,7 +85,7 @@ Then set `REPO=~/Documents/GitHub/design-skills`.
 **Before continuing:** Check that a skill with this name doesn't already exist:
 
 ```bash
-ls "$REPO/plugins/design/skills/<skill-name>" 2>/dev/null
+ls "$REPO/plugins/a8c-design/skills/<skill-name>" 2>/dev/null
 ```
 
 If it exists, tell the user and stop: "A skill named `<name>` already exists. Rename your skill and try again."
@@ -109,7 +109,7 @@ Tell the user: "Created branch `add/<skill-name>` from latest `main`."
 Create the directory and write the skill file:
 
 ```
-$REPO/plugins/design/skills/<skill-name>/SKILL.md
+$REPO/plugins/a8c-design/skills/<skill-name>/SKILL.md
 ```
 
 - If the input was a file path: copy the source file content verbatim
@@ -119,15 +119,15 @@ $REPO/plugins/design/skills/<skill-name>/SKILL.md
 
 ## Phase 5 — Update all metadata
 
-**5a. plugin.json** — `$REPO/plugins/design/.claude-plugin/plugin.json`
+**5a. plugin.json** — `$REPO/plugins/a8c-design/.claude-plugin/plugin.json`
 
 Read the current file. Add `"./skills/<skill-name>"` to the `skills` array. Bump the version: increment the MINOR version (e.g. `1.0.0` → `1.1.0`, `1.1.0` → `1.2.0`). Write the updated file.
 
 **5b. marketplace.json** — `$REPO/.claude-plugin/marketplace.json`
 
-Read the current file. Find the `design` entry in the `plugins` array. Add `"./skills/<skill-name>"` to its `skills` array. Update its `version` to match the version set in 5a. Write the updated file.
+Read the current file. Find the `a8c-design` entry in the `plugins` array. Add `"./skills/<skill-name>"` to its `skills` array. Update its `version` to match the version set in 5a. Write the updated file.
 
-**5c. CHANGELOG.md** — `$REPO/plugins/design/CHANGELOG.md`
+**5c. CHANGELOG.md** — `$REPO/plugins/a8c-design/CHANGELOG.md`
 
 Prepend a new section at the top (after the header):
 
@@ -139,18 +139,18 @@ Prepend a new section at the top (after the header):
 
 ```
 
-**5d. README.md** — `$REPO/plugins/design/README.md`
+**5d. README.md** — `$REPO/plugins/a8c-design/README.md`
 
 Add a new skill section following the existing pattern. Insert it in the `## Skills` section, before the `## Getting help` section, separated from other skills by a `---` rule:
 
 ```markdown
-### `/design:<skill-name>` — <description>
+### `/a8c-design:<skill-name>` — <description>
 
 <One paragraph describing what this skill does and when to use it.>
 
 **How to use it:**
 
-1. Type `/design:<skill-name>` and press `Enter`
+1. Type `/a8c-design:<skill-name>` and press `Enter`
 2. <Describe what to type or provide as input>
 3. Press `Enter` and Claude will <describe the output>
 
@@ -167,7 +167,7 @@ Stage and commit:
 
 ```bash
 cd "$REPO"
-git add plugins/design/ .claude-plugin/marketplace.json
+git add plugins/a8c-design/ .claude-plugin/marketplace.json
 git commit -m "feat: add <skill-name> skill"
 ```
 
@@ -179,7 +179,7 @@ gh pr create --draft \
   --title "feat: add <skill-name> skill" \
   --body "## What
 
-Adds the \`<skill-name>\` skill to the \`design\` plugin.
+Adds the \`<skill-name>\` skill to the \`a8c-design\` plugin.
 
 **Skill:** \`<skill-name>\`
 **Description:** <description>
