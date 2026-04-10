@@ -2,7 +2,7 @@
 
 AI skills for Automattic designers — product design, brand and design system workflows, and contribution tools.
 
-This repo is a [Claude Code](https://code.claude.com) plugin marketplace. Right now it hosts one plugin, `design`, with a growing collection of skills. The [SKILL.md](https://code.claude.com/docs/en/skills) format is becoming common across AI tools, so skills here are designed to be portable.
+This repo is a [Claude Code](https://code.claude.com) plugin marketplace. Right now it hosts one plugin, `design`, with a growing collection of skills contributed by Automattic designers. The [SKILL.md](https://code.claude.com/docs/en/skills) format is becoming common across AI tools, so skills here are designed to be portable.
 
 ## Install
 
