@@ -2,7 +2,7 @@
 
 AI skills for Automattic designers, bundled into a single Claude Code plugin.
 
-> **Early version.** Four skills to start — rewriting copy through a JTBD lens, contributing new skills, prototyping HTML/CSS design mockups, and building WordPress/Gutenberg UI mockups. More coming soon.
+> **Early version.** Four skills to start — contributing new skills, rewriting copy through a JTBD lens, prototyping HTML/CSS design mockups, and building WordPress/Gutenberg UI mockups. More coming soon.
 
 ---
 
@@ -33,11 +33,38 @@ Claude Code is a version of Claude that runs in your terminal and can take actio
    ```
 6. Press `Enter` to choose **Install for you (user scope)**
 7. Type `exit` and restart Claude Code
-8. Type `/` in the chat input — you should see `/design:jtbd-copy`, `/design:add-skill`, `/design:design-mockups`, and `/design:wordpress-mockups` in the list
+8. Type `/` in the chat input — you should see `/design:add-skill`, `/design:jtbd-copy`, `/design:design-mockups`, and `/design:wordpress-mockups` in the list
 
 ---
 
 ## Skills
+
+### `/design:add-skill` — Add a new skill to the design plugin
+
+Built a workflow you want to share with the design org? This skill walks you through contributing it end-to-end — from your SKILL.md file to an open draft PR. No git experience required.
+
+**How to use it:**
+
+1. Type `/design:add-skill` followed by a path to your SKILL.md, or describe what your skill does. Examples:
+   ```
+   /design:add-skill ~/my-skill/SKILL.md
+   ```
+   ```
+   /design:add-skill I want to contribute a skill that reviews spacing in Figma exports
+   ```
+2. Press `Enter` — Claude will validate your skill, find the repo, create a branch, scaffold the files, update all metadata, and open a draft PR
+3. Share the PR link in `#design` so other designers can weigh in
+
+**What it handles:**
+
+- Validating your skill's frontmatter and structure
+- Finding (or cloning) the repo
+- Creating a branch from latest `main`
+- Writing your skill to the right directory
+- Updating `plugin.json`, `marketplace.json`, `CHANGELOG.md`, and `README.md`
+- Opening a draft PR
+
+---
 
 ### `/design:jtbd-copy` — Rewrite any copy through a Jobs to Be Done lens
 
@@ -76,33 +103,6 @@ Job: "Get my client set up so they can start using the product"
 | Helper text | (none)         | Builds trust, shows it's from you | Connects to the job         |
 | Primary CTA | Submit         | Send to client                    | Names the outcome           |
 ```
-
----
-
-### `/design:add-skill` — Add a new skill to the design plugin
-
-Built a workflow you want to share with the design org? This skill walks you through contributing it end-to-end — from your SKILL.md file to an open draft PR. No git experience required.
-
-**How to use it:**
-
-1. Type `/design:add-skill` followed by a path to your SKILL.md, or describe what your skill does. Examples:
-   ```
-   /design:add-skill ~/my-skill/SKILL.md
-   ```
-   ```
-   /design:add-skill I want to contribute a skill that reviews spacing in Figma exports
-   ```
-2. Press `Enter` — Claude will validate your skill, find the repo, create a branch, scaffold the files, update all metadata, and open a draft PR
-3. Share the PR link in `#design` so other designers can weigh in
-
-**What it handles:**
-
-- Validating your skill's frontmatter and structure
-- Finding (or cloning) the repo
-- Creating a branch from latest `main`
-- Writing your skill to the right directory
-- Updating `plugin.json`, `marketplace.json`, `CHANGELOG.md`, and `README.md`
-- Opening a draft PR
 
 ---
 
