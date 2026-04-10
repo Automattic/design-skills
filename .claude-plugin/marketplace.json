@@ -1,0 +1,30 @@
+{
+  "name": "design-skills",
+  "owner": {
+    "name": "Automattic Design",
+    "url": "REPO_PLACEHOLDER"
+  },
+  "metadata": {
+    "description": "AI skills for Automattic designers",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "design",
+      "description": "AI skills for Automattic designers: product design, brand & design system, and contribution workflows",
+      "source": "./plugins/design",
+      "version": "1.0.0",
+      "author": {
+        "name": "Noam Almosnino",
+        "email": "noam.almosnino@automattic.com"
+      },
+      "license": "GPL-2.0-only",
+      "strict": true,
+      "skills": [
+        "./skills/product-jtbd-copy",
+        "./skills/add-skill"
+      ],
+      "commands": []
+    }
+  ]
+}
