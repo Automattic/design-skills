@@ -9,7 +9,7 @@ This repo is a [Claude Code](https://code.claude.com) plugin marketplace. Right 
 In Claude Code, run:
 
 ```
-/plugin marketplace add REPO_PLACEHOLDER
+/plugin marketplace add Automattic/design-skills
 /plugin install design
 ```
 

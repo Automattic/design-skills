@@ -77,7 +77,7 @@ If they provide a path: use it as `REPO`.
 If they press Enter (empty): clone the repo:
 
 ```bash
-git clone REPO_PLACEHOLDER ~/Documents/GitHub/design-skills
+git clone git@github.com:Automattic/design-skills.git ~/Documents/GitHub/design-skills
 ```
 
 Then set `REPO=~/Documents/GitHub/design-skills`.

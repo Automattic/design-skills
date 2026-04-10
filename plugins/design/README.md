@@ -25,7 +25,7 @@ Claude Code is a version of Claude that runs in your terminal and can take actio
    ```
 4. Add this marketplace:
    ```
-   /plugin marketplace add REPO_PLACEHOLDER
+   /plugin marketplace add Automattic/design-skills
    ```
 5. Install the plugin:
    ```
