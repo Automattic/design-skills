@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "AI skills for Automattic designers",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "design",
       "description": "AI skills for Automattic designers: product design, brand & design system, and contribution workflows",
       "source": "./plugins/design",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": {
         "name": "Noam Almosnino",
         "email": "noam.almosnino@automattic.com"
@@ -22,7 +22,9 @@
       "strict": true,
       "skills": [
         "./skills/jtbd-copy",
-        "./skills/add-skill"
+        "./skills/add-skill",
+        "./skills/design-mockups",
+        "./skills/wordpress-mockups"
       ],
       "commands": []
     }
