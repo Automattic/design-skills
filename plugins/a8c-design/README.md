@@ -1,4 +1,4 @@
-# Design Plugin
+# a8c-design Plugin
 
 AI skills for Automattic designers, bundled into a single Claude Code plugin.
 
@@ -29,28 +29,28 @@ Claude Code is a version of Claude that runs in your terminal and can take actio
    ```
 5. Install the plugin:
    ```
-   /plugin install design
+   /plugin install a8c-design
    ```
 6. Press `Enter` to choose **Install for you (user scope)**
 7. Type `exit` and restart Claude Code
-8. Type `/` in the chat input — you should see `/design:add-skill`, `/design:jtbd-copy`, `/design:design-mockups`, and `/design:wordpress-mockups` in the list
+8. Type `/` in the chat input — you should see `/a8c-design:add-skill`, `/a8c-design:jtbd-copy`, `/a8c-design:design-mockups`, and `/a8c-design:wordpress-mockups` in the list
 
 ---
 
 ## Skills
 
-### `/design:add-skill` — Add a new skill to the design plugin
+### `/a8c-design:add-skill` — Add a new skill to the a8c-design plugin
 
 Built a workflow you want to share with the design org? This skill walks you through contributing it end-to-end — from your SKILL.md file to an open draft PR. No git experience required.
 
 **How to use it:**
 
-1. Type `/design:add-skill` followed by a path to your SKILL.md, or describe what your skill does. Examples:
+1. Type `/a8c-design:add-skill` followed by a path to your SKILL.md, or describe what your skill does. Examples:
    ```
-   /design:add-skill ~/my-skill/SKILL.md
+   /a8c-design:add-skill ~/my-skill/SKILL.md
    ```
    ```
-   /design:add-skill I want to contribute a skill that reviews spacing in Figma exports
+   /a8c-design:add-skill I want to contribute a skill that reviews spacing in Figma exports
    ```
 2. Press `Enter` — Claude will validate your skill, find the repo, create a branch, scaffold the files, update all metadata, and open a draft PR
 3. Share the PR link in `#design` so other designers can weigh in
@@ -66,7 +66,7 @@ Built a workflow you want to share with the design org? This skill walks you thr
 
 ---
 
-### `/design:jtbd-copy` — Rewrite any copy through a Jobs to Be Done lens
+### `/a8c-design:jtbd-copy` — Rewrite any copy through a Jobs to Be Done lens
 
 For when a form, landing page, email, or ad feels functional but cold — copy that describes the system or features instead of what the reader is actually trying to do. Paste in your copy and Claude will rewrite every element so the language reflects the reader's job, not the feature's structure.
 
@@ -74,7 +74,7 @@ Works for product UI, landing pages, marketing copy, emails, ads, onboarding, er
 
 **How to use it:**
 
-1. Type `/design:jtbd-copy` and press `Enter`
+1. Type `/a8c-design:jtbd-copy` and press `Enter`
 2. Describe what you're working on, or paste in the copy directly. Examples:
    ```
    I'm working on the client invite flow. The button says "Submit" and the field is labeled "Custom message". Can you review it?
@@ -106,7 +106,7 @@ Job: "Get my client set up so they can start using the product"
 
 ---
 
-### `/design:design-mockups` — Rapidly prototype HTML/CSS mockups with a local preview server
+### `/a8c-design:design-mockups` — Rapidly prototype HTML/CSS mockups with a local preview server
 
 For when you want to explore multiple visual directions for a website or interface and compare them side by side. This skill sets up a local Express server with a gallery UI and walks you through three phases: style exploration (testing aesthetic directions), site templates (building out the chosen direction across pages), and section explorations (iterating on specific components).
 
@@ -114,7 +114,7 @@ Works best for website design, landing pages, and any project where you want to 
 
 **How to use it:**
 
-1. Type `/design:design-mockups` and press `Enter`
+1. Type `/a8c-design:design-mockups` and press `Enter`
 2. Describe the project you want to mock up. Examples:
    ```
    I'm designing a personal portfolio site — help me explore 3 or 4 different style directions
@@ -136,7 +136,7 @@ Works best for website design, landing pages, and any project where you want to 
 
 ---
 
-### `/design:wordpress-mockups` — Build accurate WordPress/Gutenberg UI mockups
+### `/a8c-design:wordpress-mockups` — Build accurate WordPress/Gutenberg UI mockups
 
 For when you're designing new interfaces or features for WordPress admin, the Site Editor, or any Gutenberg-based UI. This skill ships with pre-extracted design tokens, 321 icons, 12 components, and layout patterns — all copied directly from the Gutenberg source — so mockups look and behave like the real thing from the first pixel.
 
@@ -144,7 +144,7 @@ Instead of hand-rolling styles, Claude composes your mockup from real WordPress 
 
 **How to use it:**
 
-1. Type `/design:wordpress-mockups` and press `Enter`
+1. Type `/a8c-design:wordpress-mockups` and press `Enter`
 2. Describe the UI you want to build. Examples:
    ```
    Mock up a new Site Editor sidebar panel for managing design tokens

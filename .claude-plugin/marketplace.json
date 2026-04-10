@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "AI skills for Automattic designers",
-    "version": "1.1.0"
+    "version": "2.0.0"
   },
   "plugins": [
     {
-      "name": "design",
+      "name": "a8c-design",
       "description": "AI skills for Automattic designers: product design, brand & design system, and contribution workflows",
-      "source": "./plugins/design",
-      "version": "1.1.0",
+      "source": "./plugins/a8c-design",
+      "version": "2.0.0",
       "author": {
         "name": "Noam Almosnino",
         "email": "noam.almosnino@automattic.com"
