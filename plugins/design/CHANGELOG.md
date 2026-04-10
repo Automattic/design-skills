@@ -9,5 +9,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `product-jtbd-copy` skill — rewrite UI copy through a Jobs to Be Done lens
+- `jtbd-copy` skill — rewrite any copy (product UI, landing pages, marketing, emails) through a Jobs to Be Done lens
 - `add-skill` skill — guided contribution workflow for adding new skills to this plugin

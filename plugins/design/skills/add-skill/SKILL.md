@@ -141,10 +141,10 @@ Prepend a new section at the top (after the header):
 
 **5d. README.md** — `$REPO/plugins/design/README.md`
 
-Add a new skill section following the existing pattern. Group it under the right heading (`### Product design`, `### Brand & design system`, or `### Contribution tools`). If none fit, add a new heading. Insert before the `## Getting help` section:
+Add a new skill section following the existing pattern. Insert it in the `## Skills` section, before the `## Getting help` section, separated from other skills by a `---` rule:
 
 ```markdown
-#### `/design:<skill-name>` — <description>
+### `/design:<skill-name>` — <description>
 
 <One paragraph describing what this skill does and when to use it.>
 
@@ -156,6 +156,8 @@ Add a new skill section following the existing pattern. Group it under the right
 
 ---
 ```
+
+If the number of skills grows large enough to warrant grouping (e.g. 6+), consider proposing a restructure into themed sections (`### Copy & writing`, `### Design systems`, `### Contribution tools`) as part of the PR.
 
 ---
 

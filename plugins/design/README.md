@@ -2,7 +2,7 @@
 
 AI skills for Automattic designers, bundled into a single Claude Code plugin.
 
-> **Early version.** Two skills to start — one for product designers reviewing UI copy, one for contributing new skills to this plugin. More coming soon.
+> **Early version.** Two skills to start — one for rewriting copy through a JTBD lens, one for contributing new skills to this plugin. More coming soon.
 
 ---
 
@@ -33,32 +33,35 @@ Claude Code is a version of Claude that runs in your terminal and can take actio
    ```
 6. Press `Enter` to choose **Install for you (user scope)**
 7. Type `exit` and restart Claude Code
-8. Type `/` in the chat input — you should see `/design:product-jtbd-copy` and `/design:add-skill` in the list
+8. Type `/` in the chat input — you should see `/design:jtbd-copy` and `/design:add-skill` in the list
 
 ---
 
 ## Skills
 
-### Product design
+### `/design:jtbd-copy` — Rewrite any copy through a Jobs to Be Done lens
 
-#### `/design:product-jtbd-copy` — Rewrite UI copy through a Jobs to Be Done lens
+For when a form, landing page, email, or ad feels functional but cold — copy that describes the system or features instead of what the reader is actually trying to do. Paste in your copy and Claude will rewrite every element so the language reflects the reader's job, not the feature's structure.
 
-For when a form or flow feels functional but cold — copy that describes the system instead of what the user is actually trying to do. Paste in your UI copy and Claude will rewrite every element so the language reflects the user's job, not the feature's structure.
+Works for product UI, landing pages, marketing copy, emails, ads, onboarding, error states — anywhere copy lives.
 
 **How to use it:**
 
-1. Type `/design:product-jtbd-copy` and press `Enter`
-2. Describe what you're working on, or paste in the copy directly. For example:
+1. Type `/design:jtbd-copy` and press `Enter`
+2. Describe what you're working on, or paste in the copy directly. Examples:
    ```
    I'm working on the client invite flow. The button says "Submit" and the field is labeled "Custom message". Can you review it?
+   ```
+   ```
+   Review this landing page hero: "AI-powered workflows for modern teams. Get started today."
    ```
 3. Press `Enter` — Claude returns a full copy audit
 
 **What you get back:**
 
-- A one-sentence job statement: "The user is trying to..."
-- A before/after table for every UI element
-- Flagged cognitive gaps — places where the user might lose the thread
+- A one-sentence job statement: "The reader is trying to..."
+- A before/after table for every element
+- Flagged cognitive gaps — places where the reader might lose the thread
 - A short rationale for each rewrite
 
 **Example output:**
@@ -76,23 +79,17 @@ Job: "Get my client set up so they can start using the product"
 
 ---
 
-### Brand & design system
-
-*Coming soon.* Have a brand or design system skill to contribute? Use `/design:add-skill` or see [CONTRIBUTING.md](../../CONTRIBUTING.md).
-
----
-
-### Contribution tools
-
-#### `/design:add-skill` — Add a new skill to the design plugin
+### `/design:add-skill` — Add a new skill to the design plugin
 
 Built a workflow you want to share with the design org? This skill walks you through contributing it end-to-end — from your SKILL.md file to an open draft PR. No git experience required.
 
 **How to use it:**
 
-1. Type `/design:add-skill` followed by a path to your SKILL.md, or describe what your skill does. For example:
+1. Type `/design:add-skill` followed by a path to your SKILL.md, or describe what your skill does. Examples:
    ```
    /design:add-skill ~/my-skill/SKILL.md
+   ```
+   ```
    /design:add-skill I want to contribute a skill that reviews spacing in Figma exports
    ```
 2. Press `Enter` — Claude will validate your skill, find the repo, create a branch, scaffold the files, update all metadata, and open a draft PR

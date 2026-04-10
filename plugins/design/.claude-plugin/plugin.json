@@ -8,7 +8,7 @@
   },
   "license": "GPL-2.0-only",
   "skills": [
-    "./skills/product-jtbd-copy",
+    "./skills/jtbd-copy",
     "./skills/add-skill"
   ],
   "commands": []

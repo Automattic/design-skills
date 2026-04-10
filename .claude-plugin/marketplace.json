@@ -21,7 +21,7 @@
       "license": "GPL-2.0-only",
       "strict": true,
       "skills": [
-        "./skills/product-jtbd-copy",
+        "./skills/jtbd-copy",
         "./skills/add-skill"
       ],
       "commands": []
