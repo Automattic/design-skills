@@ -2,7 +2,7 @@
 
 AI skills for Automattic designers, bundled into a single Claude Code plugin.
 
-> **Early version.** Four skills to start — contributing new skills, rewriting copy through a JTBD lens, prototyping HTML/CSS design mockups, and building WordPress/Gutenberg UI mockups. More coming soon.
+> **Early version.** Five skills to start — contributing new skills, rewriting copy through a JTBD lens, prototyping HTML/CSS design mockups, building WordPress/Gutenberg UI mockups, and researching WordPress product decisions. More coming soon.
 
 ---
 
@@ -163,6 +163,26 @@ Instead of hand-rolling styles, Claude composes your mockup from real WordPress 
 - WordPress-accurate class naming and modifiers
 
 *Contributed by Shaun Andrews. Ported from [shaunandrews/agent-skills](https://github.com/shaunandrews/agent-skills).*
+
+---
+
+### `/a8c-design:wordpress-librarian` — Investigate how and why WordPress decisions were made
+
+For when you need to understand the reasoning behind a product decision in WordPress — not just what was built, but why, what alternatives were considered, and what was rejected. The skill searches across GitHub, Trac, Make WordPress, and internal Automattic sources (Slack, P2) to surface the key conversations, and produces a structured summary with context, problem, brainstorm, solution, dismissed ideas, and follow-up steps.
+
+Useful when onboarding to a feature area, writing a proposal that builds on prior work, or preparing for a design review where historical context matters.
+
+**How to use it:**
+
+1. Type `/a8c-design:wordpress-librarian` and press `Enter`
+2. Describe what you want to research. Examples:
+   ```
+   Investigate how DataViews came to be the default list layout in the Site Editor
+   ```
+   ```
+   Research the following: why was the Navigation block deprecated?
+   ```
+3. Claude will clarify search terms, search all relevant repositories, and return a structured markdown summary with the most relevant conversations, decision components, persistent pain points, and follow-up steps
 
 ---
 

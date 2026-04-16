@@ -13,7 +13,7 @@
       "name": "a8c-design",
       "description": "AI skills for Automattic designers: product design, brand & design system, and contribution workflows",
       "source": "./plugins/a8c-design",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "author": {
         "name": "Noam Almosnino",
         "email": "noam.almosnino@automattic.com"
@@ -24,7 +24,8 @@
         "./skills/jtbd-copy",
         "./skills/add-skill",
         "./skills/design-mockups",
-        "./skills/wordpress-mockups"
+        "./skills/wordpress-mockups",
+        "./skills/wordpress-librarian"
       ],
       "commands": []
     }
