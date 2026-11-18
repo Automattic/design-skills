@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove the `add-skill` workflow from the public plugin and route contributions through maintainers and the internal source.
 - Document installation for Claude Code, Codex, ChatGPT, and other agents.
 - Describe the collection's public scope and add packaging for individual skill downloads.
+- Check skill names, metadata, manifests, and local Markdown links in pull requests.
+- Prepare individual skill ZIPs on a draft GitHub release from a matching version tag.
 
 ## [2.0.0] - 2026-04-10
 
