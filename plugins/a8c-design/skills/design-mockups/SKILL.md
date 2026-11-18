@@ -1,11 +1,14 @@
 ---
 name: design-mockups
 description: Build and present HTML/CSS design mockups with a local preview server. Use when prototyping website designs, iterating on visual concepts, or presenting design options.
+compatibility: Requires filesystem access, a terminal, Node.js 20+, npm, and a browser preview.
 ---
 
 # Design Mockups
 
-Rapidly prototype and present HTML/CSS design mockups with a local server.
+Rapidly prototype and present HTML/CSS design mockups with a local server. Use the project brief in the user's request. Ask for it if missing.
+
+Use the current project folder or a location chosen by the user. Check for existing files before scaffolding. Run the setup below in a new project directory. For an existing Node.js project, preserve its package settings and adapt the server filename or start command to its module system.
 
 ## Design Phases
 
@@ -102,25 +105,26 @@ mockups/
 ## Quick Start
 
 ```bash
-# Reserve a port first
-portman reserve 3000 --name "{project-name}" --desc "Design mockups"
-
 # Create project
-mkdir -p ~/Developer/Projects/{project-name}
-cd ~/Developer/Projects/{project-name}
+mkdir -p {project-name}
+cd {project-name}
 mkdir -p mockups docs/logs
 
 # Initialize
 npm init -y
 npm install express
+npm pkg set type=commonjs 'scripts.start=node server.js'
+```
 
-# Copy server template (below)
+Save the server template below as `server.js`, then start it.
+
+```bash
 npm start
 ```
 
 ## Server Template
 
-Save as `server.js` — serves mockups with a gallery UI:
+Save as `server.js` to serve mockups with a gallery UI. If port 3000 is busy, choose another port with `PORT=3001 npm start`. Open the printed URL and check that the gallery and a mockup load before sharing it. For a remote environment, use its preview or forwarded port URL. To preview from another device on your network, run `HOST=0.0.0.0 npm start`.
 
 ```javascript
 const express = require('express');
@@ -129,8 +133,10 @@ const path = require('path');
 const os = require('os');
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT || 3000);
+const HOST = process.env.HOST || '127.0.0.1';
 const MOCKUPS_DIR = path.join(__dirname, 'mockups');
+fs.mkdirSync(MOCKUPS_DIR, { recursive: true });
 
 app.use('/mockups', express.static(MOCKUPS_DIR));
 
@@ -147,16 +153,29 @@ function getLocalIP() {
 }
 
 const mockupMeta = {
-  // 'filename-without-extension': { colors: ['#hex1', '#hex2'], desc: 'Description' }
+  // 'direction/home': { colors: ['#112233', '#445566'], desc: 'Homepage' }
 };
 
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[character]);
+}
+
 app.get('/', (req, res) => {
-  const mockups = fs.readdirSync(MOCKUPS_DIR)
-    .filter(f => f.endsWith('.html'))
+  const mockups = fs.readdirSync(MOCKUPS_DIR, { recursive: true })
+    .filter(f => f.endsWith('.html') && fs.statSync(path.join(MOCKUPS_DIR, f)).isFile())
+    .sort()
     .map(f => {
-      const slug = f.replace('.html', '');
+      const relativePath = f.split(path.sep).join('/');
+      const slug = relativePath.replace(/\.html$/, '');
       const meta = mockupMeta[slug] || { colors: ['#ccc', '#999', '#666', '#333'], desc: '' };
-      return { name: slug.replace(/-/g, ' '), file: f, path: `/mockups/${f}`, colors: meta.colors, desc: meta.desc };
+      return {
+        name: escapeHtml(slug.replace(/-/g, ' ')),
+        path: `/mockups/${relativePath.split('/').map(encodeURIComponent).join('/')}`,
+        colors: meta.colors,
+        desc: escapeHtml(meta.desc)
+      };
     });
 
   res.send(`<!DOCTYPE html>
@@ -190,13 +209,22 @@ app.get('/', (req, res) => {
     <div class="grid">
       ${mockups.map(m => `<a href="${m.path}" class="card"><div class="preview">${m.colors.map(c => `<div class="swatch" style="background:${c}"></div>`).join('')}</div><div class="info"><div class="name">${m.name}</div><div class="desc">${m.desc}</div></div></a>`).join('')}
     </div>
-    <div class="meta">Local: <code>http://localhost:${PORT}</code> · Network: <code>http://${getLocalIP()}:${PORT}</code></div>
+    <div class="meta">Local: <code>http://localhost:${PORT}</code> · ${HOST === '0.0.0.0' ? `Network: <code>http://${getLocalIP()}:${PORT}</code>` : 'Local preview'}</div>
   </div>
 </body>
 </html>`);
 });
 
-app.listen(PORT, '0.0.0.0', () => console.log(`Mockup server: http://localhost:${PORT} | http://${getLocalIP()}:${PORT}`));
+const server = app.listen(PORT, HOST, () => {
+  console.log(`Mockup server: http://localhost:${server.address().port}`);
+  if (HOST === '0.0.0.0') {
+    console.log(`Network: http://${getLocalIP()}:${server.address().port}`);
+  }
+});
+server.on('error', error => {
+  console.error(`Could not start the mockup server: ${error.message}`);
+  process.exitCode = 1;
+});
 ```
 
 ## Naming Conventions
@@ -215,38 +243,15 @@ app.listen(PORT, '0.0.0.0', () => console.log(`Mockup server: http://localhost:$
 2. **Never overwrite** — Create new files for iterations (`-v2`, `-v3`)
 3. **Shared styles in Phase 2+** — Use a `styles.css` for the chosen direction
 4. **Document decisions** — Log sessions in `docs/logs/`
-5. **Check port before answering** — `portman check {port}` to verify server state
-6. **Update the index** — When adding/moving mockups, update `server.js` listings
+5. **Check the preview before answering** — Open the gallery and at least one mockup in the browser
+6. **Refresh the gallery** — New and moved HTML files are discovered automatically
 7. **Restart after changes** — Kill and restart the server after updating `server.js`
 
 ## Updating the Gallery Index
 
-The `server.js` file contains arrays that define what appears in the gallery:
+The server discovers HTML files in `mockups/` and its subfolders on each gallery request. Refresh the page after adding, moving, or removing a mockup.
 
-```javascript
-// Page templates in the chosen direction
-const terminalV2Pages = [
-  { name: 'Home', file: 'home.html', desc: 'Homepage with recent posts' },
-  // ... add new pages here
-];
-
-// Section explorations
-const projectsExplorations = [
-  { name: 'File Tree', file: 'projects-file-tree.html', desc: 'ls -la style' },
-  { name: 'File Tree v2', file: 'projects-file-tree-v2.html', desc: 'With icons' },
-  // ... add new explorations here
-];
-```
-
-**When you add a mockup:**
-1. Create the HTML file in the correct location
-2. Add an entry to the appropriate array in `server.js`
-3. Restart the server: kill the process, run `npm start`
-
-**When you move mockups:**
-1. Move the files
-2. Update the paths in `server.js` (e.g., `/mockups/terminal-v2-site/...`)
-3. Restart the server
+Optionally add a `mockupMeta` entry in `server.js` for colors and a description. Use the path relative to `mockups/`, without `.html`, as its key. For example, use `terminal-v2-site/home` for `mockups/terminal-v2-site/home.html`. Restart the server after editing `server.js`.
 
 ## Mockup Best Practices
 
@@ -302,7 +307,7 @@ body::before {
 ## Tips
 
 - **Iterate fast** — Don't perfect, explore
-- **Test on phone** — Use network URL
+- **Test on phone** — Start with `HOST=0.0.0.0 npm start` and use the network URL
 - **Commit often** — Git tracks your exploration
-- **Reserve ports** — Use `portman` to avoid conflicts
+- **Choose a free port** — If port 3000 is busy, use `PORT=3001 npm start`
 - **Update README** — Keep project docs current with the chosen direction
