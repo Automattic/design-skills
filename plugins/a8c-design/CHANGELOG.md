@@ -5,6 +5,12 @@ All notable changes to the `a8c-design` plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2026-11-18
+
+### Added
+
+- `feedback-triage`, which turns a call transcript, meeting notes, a thread or a review into a triage page where you mark every point Do it, Park or Skip, with notes. The agent then builds the approved items one branch at a time and reports each result back on its item. In Claude Code with claude.ai Artifacts, decisions and progress sync through the page's shared store. Elsewhere, the page runs as a local file and exports decisions to paste back into the chat.
+
 ## [2.1.0] - 2026-11-18
 
 ### Fixed

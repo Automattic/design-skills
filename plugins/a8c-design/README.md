@@ -1,6 +1,6 @@
 # a8c-design
 
-Portable design workflows maintained by Automattic. The `skills/` folder contains six skills and their supporting files.
+Portable design workflows maintained by Automattic. The `skills/` folder contains seven skills and their supporting files.
 
 | Skill | What it does | Example request |
 | --- | --- | --- |
@@ -10,6 +10,7 @@ Portable design workflows maintained by Automattic. The `skills/` folder contain
 | [design-tokens](skills/design-tokens/SKILL.md) | Create and validate design token systems and themes | Create primitive and semantic tokens for light and dark themes. |
 | [voiceover-scriptwriting](skills/voiceover-scriptwriting/SKILL.md) | Draft, normalize, and time spoken narration | Write a thirty-second product explainer for small business owners. |
 | [wpds-changes](skills/wpds-changes/SKILL.md) | Summarize changes and discussions in the WordPress design system | Summarize WordPress design system updates from the last week. |
+| [feedback-triage](skills/feedback-triage/SKILL.md) | Turn a call or review into a page where you decide on every point, then build the approved ones | Triage the transcript from yesterday's design review. |
 
 ## Claude Code
 
@@ -20,7 +21,7 @@ Run these commands in a Claude Code session.
 /plugin install a8c-design@design-skills
 ```
 
-Invoke `/a8c-design:<skill-name>`, followed by your request. For example, use `/a8c-design:voiceover-scriptwriting` or `/a8c-design:wpds-changes week`. The plugin makes all six skills available.
+Invoke `/a8c-design:<skill-name>`, followed by your request. For example, use `/a8c-design:voiceover-scriptwriting` or `/a8c-design:wpds-changes week`. The plugin makes all seven skills available.
 
 ## Codex
 
@@ -34,7 +35,7 @@ Use an individual skill archive from [GitHub Releases](https://github.com/Automa
 
 Availability depends on the account and workspace settings. See [Skills in ChatGPT](https://help.openai.com/en/articles/20001066-skills-in-chatgpt).
 
-`jtbd-copy` works with user-provided text. `wordpress-mockups` requires access to its bundled files and a way to create HTML. `design-mockups` requires a terminal, Node.js 20+, npm, and a reachable browser preview. Check that your ChatGPT environment provides those capabilities before using it.
+`jtbd-copy` works with user-provided text. `wordpress-mockups` requires access to its bundled files and a way to create HTML. `design-mockups` requires a terminal, Node.js 20+, npm, and a reachable browser preview. `feedback-triage` needs Python to render its page and a way to give you the HTML file. Check that your ChatGPT environment provides those capabilities before using it.
 
 ## Other agents
 
@@ -51,6 +52,8 @@ For `design-tokens`, retain `assets/`, `references/`, and `scripts/`. Its valida
 For `voiceover-scriptwriting`, retain `references/` and `scripts/`. The bundled duration check requires Python 3.10+. The skill supports estimating duration when code execution is unavailable. Audio generation is optional and requires access to the chosen provider.
 
 For `wpds-changes`, provide the timespan in your request. The source instructions refer to Claude tool names such as `AskUserQuestion`, `Bash`, and `WebSearch`. In other agents, use their equivalent question, date, and web/GitHub search capabilities. It reads public WordPress repositories.
+
+For `feedback-triage`, retain `assets/`, `references/`, and `scripts/`. Rendering the triage page uses Python 3. In Claude Code signed in to claude.ai, the page is published as an Artifact with a shared store: decisions save as they're made and progress appears live. Elsewhere, the page is a self-contained HTML file to open in a browser. Choices stay in that browser until **Copy decisions** or **Download** hands them back, and the agent re-renders the page to show progress. Building the approved items needs a repository, git, and optionally `gh` for pull requests. The instructions use Claude tool names such as `Artifact`, `ArtifactData`, and `AskUserQuestion`; other agents use the local-file path and their own question tool.
 
 The internal `product-jtbd-copy` workflow is available here as `jtbd-copy`, keeping the existing public skill name.
 

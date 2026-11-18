@@ -1,7 +1,7 @@
 {
   "name": "a8c-design",
-  "version": "2.1.0",
-  "description": "Reusable skills for product copy, design tokens, mockups, voiceover scripts, and WordPress design system updates",
+  "version": "2.2.0",
+  "description": "Reusable skills for product copy, design tokens, mockups, voiceover scripts, WordPress design system updates, and feedback triage",
   "author": {
     "name": "Noam Almosnino",
     "email": "noam.almosnino@automattic.com"
@@ -13,7 +13,8 @@
     "./skills/wordpress-mockups",
     "./skills/design-tokens",
     "./skills/voiceover-scriptwriting",
-    "./skills/wpds-changes"
+    "./skills/wpds-changes",
+    "./skills/feedback-triage"
   ],
   "commands": []
 }
