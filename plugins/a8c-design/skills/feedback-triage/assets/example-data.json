@@ -1,0 +1,149 @@
+{
+  "title": "Checkout review triage",
+  "slug": "checkout-review-2026-10-20",
+  "intro": "Every action item, idea and open question from the weekly design sync, grouped by area.",
+  "source": { "kind": "Granola transcript", "label": "Weekly design sync", "date": "2026-10-20", "people": ["Priya Shah", "Sam Ortega"] },
+  "author": { "name": "Sam Ortega", "url": "https://example.wordpress.com" },
+  "followUpLabel": "For Priya",
+  "horizons": { "now": "Now", "later": "Later", "outside": "Outside" },
+  "areas": [
+    { "id": "pay", "name": "Payment step", "blurb": "The card form, saved cards and the order summary beside them." },
+    { "id": "conf", "name": "Order confirmation", "blurb": "What the shopper sees once the order goes through." },
+    { "id": "proto", "name": "Prototype and demos", "blurb": "How the prototype is shared and shown to stakeholders." },
+    { "id": "later", "name": "Strategy and later", "blurb": "Bigger ideas that came up but aren't for this round." }
+  ],
+  "items": [
+    {
+      "id": "P1",
+      "area": "pay",
+      "horizon": "now",
+      "size": "S",
+      "owner": "Sam",
+      "title": "Show saved cards before the new card form",
+      "summary": "Priya noticed returning shoppers scroll past an empty card form to reach the card they already saved. Most orders in the test store come from returning shoppers, so the common case is hidden.",
+      "actions": [
+        "Move the saved-card list above the new card form.",
+        "Collapse the new card form behind \"Use a different card\" when at least one saved card exists.",
+        "Keep the form open by default for first-time shoppers."
+      ],
+      "quotes": [
+        { "who": "Priya", "text": "I had to scroll past a whole empty form just to pick the card I already have." },
+        { "who": "Sam", "text": "Yeah, that's backwards. I'll flip it today." }
+      ],
+      "recommendation": { "decision": "do", "reason": "Committed on the call, and it's a small layout change." }
+    },
+    {
+      "id": "P2",
+      "area": "pay",
+      "horizon": "now",
+      "size": "M",
+      "owner": "Sam",
+      "title": "Make the order summary readable on phones",
+      "summary": "On a phone the summary sits below the pay button, so shoppers pay before they see the total. Priya wants the total visible before the button.",
+      "actions": [
+        "Add a collapsed summary bar with the total above the payment step on narrow screens.",
+        "Expand it to the full line items on tap."
+      ],
+      "quotes": [
+        { "who": "Priya", "text": "On my phone I didn't see the total until after I'd hit pay." }
+      ],
+      "recommendation": { "decision": "do", "reason": "A real trust problem, and the pattern is well known." }
+    },
+    {
+      "id": "P3",
+      "area": "pay",
+      "horizon": "later",
+      "size": "M",
+      "owner": "Priya",
+      "title": "Decide whether express buttons go above or below the form",
+      "summary": "Priya and Sam disagreed on where express payment buttons belong. Nobody settled it; Priya wants to look at the conversion data first.",
+      "actions": [
+        "Priya pulls conversion by placement from the last test.",
+        "Revisit at the next sync."
+      ],
+      "quotes": [
+        { "who": "Priya", "text": "Let me look at the numbers before we move those around." }
+      ],
+      "recommendation": { "decision": "park", "reason": "Waiting on data Priya owns." }
+    },
+    {
+      "id": "C1",
+      "area": "conf",
+      "horizon": "now",
+      "size": "S",
+      "owner": "Sam",
+      "title": "Say when the order will arrive, not just that it was placed",
+      "summary": "The confirmation says \"Order received\" and nothing else. Priya suggested leading with the delivery estimate, since that's the next question every shopper has.",
+      "actions": [
+        "Lead the confirmation with the delivery estimate.",
+        "Move the order number to a secondary line."
+      ],
+      "quotes": [
+        { "who": "Priya", "text": "The first thing anyone wants to know is when it shows up." }
+      ],
+      "recommendation": { "decision": "do", "reason": "Copy and hierarchy only." }
+    },
+    {
+      "id": "C2",
+      "area": "conf",
+      "horizon": "later",
+      "size": "L",
+      "title": "Offer account creation after the order instead of before",
+      "summary": "Sam floated moving account creation to the confirmation page. Priya liked it but flagged that it touches the accounts team's flow.",
+      "actions": [
+        "Raise it with the accounts team before designing anything."
+      ],
+      "quotes": [
+        { "who": "Sam", "text": "What if we just ask them to save their details after they've paid?" },
+        { "who": "Priya", "text": "I like it, but that's the accounts team's call." }
+      ],
+      "recommendation": { "decision": "park", "reason": "Belongs to another team; worth raising, not building." }
+    },
+    {
+      "id": "D1",
+      "area": "proto",
+      "horizon": "now",
+      "size": "S",
+      "owner": "Sam",
+      "title": "Add a toggle for returning versus first-time shopper",
+      "summary": "Stakeholders keep asking what a first-time shopper sees. A toggle in the prototype would answer it in the demo.",
+      "actions": [
+        "Add a \"Returning shopper\" toggle to the prototype's demo panel.",
+        "Default it on, since that's the common case."
+      ],
+      "quotes": [
+        { "who": "Priya", "text": "Can I flip between new and returning in the demo?" }
+      ],
+      "recommendation": { "decision": "do", "reason": "Makes P1 demoable, and it's cheap." }
+    },
+    {
+      "id": "D2",
+      "area": "proto",
+      "horizon": "now",
+      "size": "S",
+      "owner": "Sam",
+      "title": "Record a short walkthrough for people who missed the sync",
+      "summary": "Two stakeholders missed the call. Sam offered a two-minute recording of the changes once they land.",
+      "actions": [
+        "Record once P1, P2 and C1 are ready.",
+        "Post it in the project channel."
+      ],
+      "quotes": [
+        { "who": "Sam", "text": "I'll do a quick Loom once these are in." }
+      ],
+      "recommendation": { "decision": "do", "reason": "Committed on the call; Sam does this one personally." }
+    },
+    {
+      "id": "S1",
+      "area": "later",
+      "horizon": "outside",
+      "size": "L",
+      "title": "One-page checkout for stores with a single product",
+      "summary": "Priya mentioned single-product stores could skip the cart entirely. Interesting, but a separate project.",
+      "quotes": [
+        { "who": "Priya", "text": "For stores that sell one thing, why is there a cart at all?" }
+      ],
+      "recommendation": { "decision": "skip", "reason": "Out of scope for this round; noted so it isn't lost." }
+    }
+  ]
+}

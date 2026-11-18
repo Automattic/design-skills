@@ -1,7 +1,6 @@
 ---
-name: product-jtbd-copy
+name: jtbd-copy
 description: Use when writing or reviewing UI copy - rewrites labels, CTAs, helpers, and placeholders through a Jobs to Be Done lens so every element reflects the user's actual goal, not the system's internal model.
-argument-hint: "[paste UI copy, describe a flow, or share a screenshot description]"
 ---
 
 # JTBD Copy
@@ -109,6 +108,6 @@ Job: "[user's job statement]"
 | Every CTA is outcome-framed | Some actions are just actions. "Cancel" is fine as "Cancel." |
 | Forgot to demote secondary paths | If there are two equal buttons, one is lying about its importance |
 
-## Task
+## Input
 
-$ARGUMENTS
+Use the copy, flow description, or screenshot supplied by the user. Ask for the copy or context if it is missing.

@@ -1,7 +1,7 @@
 {
   "name": "a8c-design",
-  "version": "2.0.0",
-  "description": "AI skills for Automattic designers: product design, brand & design system, and contribution workflows",
+  "version": "2.2.0",
+  "description": "Reusable skills for product copy, design tokens, mockups, voiceover scripts, WordPress design system updates, and feedback triage",
   "author": {
     "name": "Noam Almosnino",
     "email": "noam.almosnino@automattic.com"
@@ -9,9 +9,12 @@
   "license": "GPL-2.0-only",
   "skills": [
     "./skills/jtbd-copy",
-    "./skills/add-skill",
     "./skills/design-mockups",
-    "./skills/wordpress-mockups"
+    "./skills/wordpress-mockups",
+    "./skills/design-tokens",
+    "./skills/voiceover-scriptwriting",
+    "./skills/wpds-changes",
+    "./skills/feedback-triage"
   ],
   "commands": []
 }

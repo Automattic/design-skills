@@ -1,0 +1,443 @@
+<meta charset="utf-8">
+<title>__TRIAGE_TITLE__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cstyle%3E.i%7Bfill:%23000%7D@media (prefers-color-scheme:dark)%7B.i%7Bfill:%23fff%7D%7D%3C/style%3E%3Crect width='8' height='8' rx='2' fill='%2372b3ff'/%3E%3Crect class='i' x='10' width='8' height='8' rx='2'/%3E%3Crect class='i' y='10' width='8' height='8' rx='2'/%3E%3Crect x='10' y='10' width='8' height='8' rx='2' fill='%2372b3ff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Automattic brand: a palette that reads black and white, with light blue as the one
+   signature color. Inter for running text, Source Serif 4 for editorial lines,
+   JetBrains Mono for ids and branches. Knockout is left out: it's licensed and must
+   not be approximated. The brand has no success or error colors, so --ok and
+   --danger come from the WordPress admin palette. Never set blue type on black. */
+:root {
+  --bg: #ffffff; --surface: #f6f7f7; --ink: #000000; --muted: #646970; --faint: #a7aaad;
+  --line: #dcdcde; --track: #dcdcde;
+  --signature: #72b3ff; --on-signature: #000000; --focus: #0387ff;
+  --ok: #008a20; --danger: #d63638;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --font: "Inter", ui-sans-serif, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000000; --surface: #1d2327; --ink: #ffffff; --muted: #a7aaad; --faint: #646970;
+    --line: #2c3338; --track: #3c434a; --ok: #4ab866; --danger: #f86368; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #000000; --surface: #1d2327; --ink: #ffffff; --muted: #a7aaad; --faint: #646970;
+  --line: #2c3338; --track: #3c434a; --ok: #4ab866; --danger: #f86368; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font: 14px/1.55 var(--font); -webkit-font-smoothing: antialiased; }
+a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+
+.page {
+  max-width: 1440px; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 300px; column-gap: 40px;
+  grid-template-areas: "head tools" "work side";
+}
+.tools { grid-area: tools; display: flex; justify-content: flex-end; align-items: flex-start; }
+/* Light/dark switch: a track with a sliding knob, set from the system on load. */
+.theme-switch { display: inline-flex; border: 0; background: none; padding: 4px 0; border-radius: 80px; cursor: pointer; }
+.theme-switch .track { position: relative; width: 48px; height: 28px; border-radius: 80px; background: var(--track); transition: background-color .2s var(--ease); }
+.theme-switch .knob { position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; color: var(--ink); background: var(--bg); box-shadow: 0 1px 2px rgb(0 0 0 / .2); transition: transform .2s var(--ease); }
+.theme-switch[aria-checked="true"] .track { background: var(--signature); }
+.theme-switch[aria-checked="true"] .knob { transform: translateX(20px); background: #000000; color: #ffffff; }
+.theme-switch svg { width: 14px; height: 14px; grid-area: 1 / 1; }
+.theme-switch .moon, .theme-switch[aria-checked="true"] .sun { display: none; }
+.theme-switch[aria-checked="true"] .moon { display: block; }
+header.head { grid-area: head; padding-bottom: 28px; }
+.work { grid-area: work; min-width: 0; }
+aside.side { grid-area: side; }
+
+.name { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 16px; }
+.mark { width: 18px; height: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.mark i { border-radius: 2px; background: var(--signature); }
+.mark i:nth-child(2), .mark i:nth-child(3) { background: var(--ink); }
+.statement { font: 400 30px/1.2 var(--serif); letter-spacing: -0.01em; margin: 0; max-width: 30em; text-wrap: balance; }
+.statement span { color: var(--muted); display: block; }
+.meta { margin-top: 14px; color: var(--muted); font-size: 12.5px; }
+
+/* The board: every item at a glance, on the brand's dark narrative surface in both themes. */
+.board {
+  --board-bg: #1d2327; --dot: rgb(255 255 255 / 0.08);
+  --b-ink: #ffffff; --b-muted: #c3c4c7; --edge: rgb(255 255 255 / 0.18);
+  position: relative; border-radius: 16px; background-color: var(--board-bg);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.4px); background-size: 16px 16px; background-position: center;
+  padding: 56px 40px 40px; color: var(--b-ink);
+}
+:root[data-theme="dark"] .board { box-shadow: inset 0 0 0 1px var(--line); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .board { box-shadow: inset 0 0 0 1px var(--line); } }
+.board-stats { position: absolute; top: 16px; right: 20px; font: 12px var(--mono); color: var(--b-muted); font-variant-numeric: tabular-nums; }
+.board-key { position: absolute; top: 14px; left: 16px; display: flex; gap: 6px; flex-wrap: wrap; }
+.key { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 80px; font-size: 12px;
+  background: #ffffff; color: #000000; }
+.key b { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.areas-map { display: flex; flex-direction: column; gap: 18px; }
+.map-row { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 16px; align-items: start; }
+.map-label { color: var(--b-muted); font-size: 12.5px; padding-top: 10px; text-wrap: balance; }
+.tiles { display: flex; flex-wrap: wrap; gap: 8px; }
+.tile {
+  position: relative; width: 52px; height: 40px; border-radius: 10px; border: 1px solid var(--edge);
+  background: transparent; color: var(--b-ink); font: 500 12px var(--mono); cursor: pointer;
+  transition: transform .2s var(--ease), background-color .2s var(--ease);
+}
+.tile:hover { transform: translateY(-2px); }
+.tile.d-do { background: var(--signature); border-color: var(--signature); color: var(--on-signature); }
+.tile.d-park { background: rgb(255 255 255 / .14); }
+.tile.d-skip { color: var(--b-muted); text-decoration: line-through; border-style: dashed; }
+.tile .p { position: absolute; top: -4px; right: -4px; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 2px var(--board-bg); }
+.tile .p.ok { background: #4ab866; } .tile .p.active { background: #ffffff; } .tile .p.bad { background: #f86368; }
+
+/* Sidebar */
+.side-inner { position: sticky; top: max(16px, env(safe-area-inset-top, 0px)); display: flex; flex-direction: column; gap: 22px; min-height: calc(100vh - 48px); }
+.hero { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.hero label { font-size: 13px; font-weight: 500; }
+.hero output { font: 500 30px var(--mono); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.counts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.count { background: var(--surface); border-radius: 10px; padding: 8px 10px; }
+.count span { display: block; font-size: 12px; color: var(--muted); }
+.count output { font: 500 18px var(--mono); font-variant-numeric: tabular-nums; }
+.group > .lbl { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+.hint { font-size: 12.5px; color: var(--muted); margin: 6px 0 0; text-wrap: pretty; }
+.seg { display: flex; flex-wrap: wrap; gap: 2px; background: var(--surface); border-radius: 80px; padding: 3px; }
+.seg button { flex: 1 1 auto; border: 0; background: transparent; color: var(--muted); font: 500 13px var(--font); padding: 6px 10px; border-radius: 80px; cursor: pointer; min-height: 32px; transition: background-color .15s var(--ease), color .15s var(--ease); }
+.seg button:hover { color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--bg); color: var(--ink); box-shadow: 0 1px 2px rgb(0 0 0 / .12); }
+select, textarea { width: 100%; font: 14px var(--font); color: var(--ink); background: var(--surface); border: 0; border-radius: 10px; padding: 9px 12px; }
+textarea { min-height: 60px; resize: vertical; }
+textarea::placeholder { color: var(--faint); }
+.credit code { font: 12px var(--mono); }
+.credit { margin-top: auto; font-size: 12.5px; color: var(--muted); padding-top: 12px; border-top: 1px solid var(--line); }
+.banner { background: var(--surface); border-radius: 10px; padding: 10px 12px; font-size: 12.5px; color: var(--muted); }
+.banner strong { color: var(--danger); font-weight: 600; }
+.banner-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.banner-actions button { border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: 500 12.5px var(--font); padding: 6px 12px; border-radius: 80px; cursor: pointer; min-height: 32px; transition: border-color .15s var(--ease); }
+.banner-actions button:hover { border-color: var(--ink); }
+
+/* The list */
+section.area { margin-top: 56px; }
+.area-head { display: flex; align-items: baseline; gap: 12px; }
+.area-head h2 { font: 400 26px/1.2 var(--serif); letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+.area-head .n { font: 12px var(--mono); color: var(--muted); }
+.area-blurb { color: var(--muted); margin: 6px 0 0; max-width: 68ch; text-wrap: pretty; }
+article.item { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 0 16px; padding: 24px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 16px; }
+article.item:first-of-type { border-top: 1px solid var(--line); margin-top: 16px; }
+.iid { font: 500 12px var(--mono); color: var(--muted); padding-top: 3px; }
+article.d-do .iid { color: var(--ink); }
+article.d-do .iid::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--signature); margin-right: 6px; vertical-align: 1px; }
+article.d-skip .body > :not(.decide) { opacity: .55; }
+.body { min-width: 0; display: flex; flex-direction: column; gap: 10px; max-width: 72ch; }
+.body h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: 12px; padding: 2px 10px; border-radius: 80px; background: var(--surface); color: var(--muted); }
+.summary { margin: 0; text-wrap: pretty; }
+.sub { font-size: 13px; font-weight: 500; margin: 0 0 4px; }
+.actions { margin: 0; padding-left: 18px; }
+.actions li + li { margin-top: 3px; }
+details.quotes summary { cursor: pointer; list-style: none; font-size: 13px; font-weight: 500; color: var(--muted); display: inline-flex; gap: 6px; }
+details.quotes summary::-webkit-details-marker { display: none; }
+details.quotes summary::after { content: "+"; font-family: var(--mono); }
+details.quotes[open] summary::after { content: "−"; }
+details.quotes summary:hover { color: var(--ink); }
+blockquote { margin: 10px 0 0; padding: 0 0 0 16px; border-left: 3px solid var(--signature); }
+blockquote p { margin: 0; font: italic 400 16px/1.45 var(--serif); }
+blockquote cite { display: block; font-style: normal; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.rec { font-size: 13px; color: var(--muted); }
+.rec strong { color: var(--ink); font-weight: 600; }
+.decide { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.decide .seg { max-width: 360px; }
+.decide .seg button[data-v="do"][aria-pressed="true"] { background: var(--signature); color: var(--on-signature); font-weight: 600; box-shadow: none; }
+.saved { font: 12px var(--mono); color: var(--muted); min-height: 1em; }
+.progress { background: var(--surface); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; }
+.p-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.status { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
+.status.ok i { background: var(--ok); } .status.active i { background: var(--signature); } .status.bad i { background: var(--danger); }
+.branch { font: 12px var(--mono); color: var(--muted); word-break: break-all; }
+/* The PR, linked: the one place a reviewer goes next. Health dots follow the
+   status rules: --ok when open or merged, muted for drafts, --danger closed. */
+.pr { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 80px; background: var(--bg); color: var(--ink); font: 500 12px var(--mono); text-decoration: none; transition: box-shadow .15s var(--ease); }
+.pr:hover { color: var(--ink); box-shadow: 0 0 0 1.5px var(--focus); }
+.pr i { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+.pr.draft i { background: var(--faint); } .pr.closed i { background: var(--danger); }
+.progress ul { margin: 0; padding-left: 18px; }
+.followup { border-top: 1px solid var(--line); padding-top: 8px; }
+.empty { padding: 48px 0; color: var(--muted); }
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 8px); opacity: 0; background: var(--ink); color: var(--bg); border-radius: 80px; padding: 8px 16px; font-size: 13px; transition: opacity .2s var(--ease), transform .2s var(--ease); pointer-events: none; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 860px) {
+  .page { grid-template-columns: minmax(0, 1fr); grid-template-areas: "tools" "head" "work" "side"; }
+  .statement { font-size: 24px; }
+  .side-inner { position: static; min-height: 0; margin-top: 32px; }
+  .map-row { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .map-label { padding-top: 0; }
+  .board { padding: 64px 16px 24px; }
+}
+@media (max-width: 520px) { .page { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); } article.item { grid-template-columns: minmax(0, 1fr); } .iid { padding: 0 0 4px; } }
+</style>
+
+<div class="page">
+  <header class="head">
+    <p class="name"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="t-name"></span></p>
+    <p class="statement"><span id="t-intro-1" style="color:var(--ink);display:inline"></span> <span id="t-intro-2">Mark each one Do it, Skip or Park, and add a note to change its scope.</span></p>
+    <p class="meta" id="t-meta"></p>
+  </header>
+
+  <div class="tools"><button type="button" class="theme-switch" id="theme-switch" role="switch" aria-checked="false" aria-label="Dark mode" title="Dark mode"><span class="track" aria-hidden="true"><span class="knob"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg></span></span></button></div>
+
+  <main class="work">
+    <div class="board" aria-label="Every item at a glance">
+      <div class="board-key" aria-hidden="true">
+        <span class="key"><b style="background:#72b3ff"></b>Do it</span>
+        <span class="key"><b style="background:#c3c4c7"></b>Park</span>
+        <span class="key"><b style="border:1px dashed #646970"></b>Skip</span>
+        <span class="key"><b style="background:#008a20;border-radius:50%"></b>Ready</span>
+      </div>
+      <div class="board-stats" id="board-stats"></div>
+      <div class="areas-map" id="map"></div>
+    </div>
+    <div id="list"></div>
+  </main>
+
+  <aside class="side">
+    <div class="side-inner">
+      <div class="banner" id="banner" hidden></div>
+      <div>
+        <div class="hero"><label for="undecided">Undecided</label><output id="undecided">0</output></div>
+        <div class="counts">
+          <div class="count"><span>Do it</span><output id="c-do">0</output></div>
+          <div class="count"><span>Park</span><output id="c-park">0</output></div>
+          <div class="count"><span>Skip</span><output id="c-skip">0</output></div>
+        </div>
+      </div>
+      <div class="group"><p class="lbl">Area</p><select id="f-area" aria-label="Area"></select></div>
+      <div class="group"><p class="lbl">Decision</p><div class="seg" id="f-status" role="group" aria-label="Decision"></div></div>
+      <div class="group"><p class="lbl">Horizon</p><div class="seg" id="f-when" role="group" aria-label="Horizon"></div></div>
+      <div class="group"><p class="lbl">Work</p><div class="seg" id="f-work" role="group" aria-label="Work"></div>
+        <p class="hint">Status, branch, how to test and follow-up notes appear on each item as the work happens.</p></div>
+      <div class="group">
+        <p class="lbl"><label for="general-note">Anything else</label></p>
+        <textarea id="general-note" placeholder="Priorities, sequencing, or anything I missed."></textarea>
+        <div class="saved" id="general-saved"></div>
+      </div>
+      <p class="credit" id="credit">Made with <code>a8c-design:feedback-triage</code></p>
+    </div>
+  </aside>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script id="triage-data" type="application/json">__TRIAGE_DATA__</script>
+<script>
+const DATA = JSON.parse(document.getElementById('triage-data').textContent);
+const ITEMS = DATA.items, AREAS = DATA.areas, WHEN = DATA.horizons || {};
+const FOLLOW = DATA.followUpLabel || 'Follow-up';
+const LABEL = { do: 'Do it', skip: 'Skip', park: 'Park' };
+const SIZE = { S: 'Small', M: 'Medium', L: 'Large' };
+const PSTATUS = { planned: ['Planned', ''], progress: ['In progress', 'active'], ready: ['Ready to test', 'ok'], pr: ['PR open', 'ok'], merged: ['Merged', 'ok'], blocked: ['Blocked', 'bad'], note: ['Note', ''] };
+const state = { decisions: {}, progress: Object.assign({}, DATA.progress), area: 'all', when: 'all', status: 'all', work: 'all' };
+let db = null; const chains = {};
+const LS = 'triage.' + (DATA.slug || 'default') + '.v1';
+const lsRead = () => { try { return JSON.parse(localStorage.getItem(LS) || '{}'); } catch (e) { return {}; } };
+const lsWrite = (o) => { try { localStorage.setItem(LS, JSON.stringify(o)); } catch (e) {} };
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const safeUrl = (u) => (/^https:\/\//.test(String(u || '')) ? u : null);
+const byId = (id) => ITEMS.find((i) => i.id === id);
+
+function toast(text) { const t = document.getElementById('toast'); t.textContent = text; t.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('on'), 1600); }
+function mark(id, msg) { const el = document.getElementById(id === 'GENERAL' ? 'general-saved' : 'saved-' + id); if (el) el.textContent = msg; }
+
+function save(id, patch) {
+  const next = Object.assign({}, state.decisions[id] || {}, patch, { updatedAt: new Date().toISOString() });
+  state.decisions[id] = next; const d = lsRead(); d[id] = next; lsWrite(d);
+  const body = { decision: next.decision || null, comment: next.comment || '', updatedAt: next.updatedAt, title: byId(id)?.title || 'General notes' };
+  if (!db) { mark(id, 'Saved in this browser only'); return; }
+  chains[id] = (chains[id] || Promise.resolve()).then(() => db.doc('decisions/' + id).set(body)).then(
+    () => mark(id, 'Saved'),
+    (e) => mark(id, e && e.code === 'invalid_argument' ? 'You can view this page but not save to it' : 'Could not save. Try again.'));
+}
+
+function seg(el, group, options) {
+  el.innerHTML = '';
+  options.forEach(([v, l]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = l; b.setAttribute('aria-pressed', String(state[group] === v)); b.onclick = () => { state[group] = v; renderFilters(); renderList(); }; el.appendChild(b); });
+}
+function renderFilters() {
+  const a = document.getElementById('f-area');
+  a.innerHTML = '<option value="all">All areas</option>' + AREAS.map((x) => `<option value="${esc(x.id)}">${esc(x.name)}</option>`).join('');
+  a.value = state.area; a.onchange = () => { state.area = a.value; renderList(); };
+  seg(document.getElementById('f-status'), 'status', [['all', 'All'], ['open', 'Open'], ['do', 'Do'], ['park', 'Park'], ['skip', 'Skip']]);
+  seg(document.getElementById('f-when'), 'when', [['all', 'All'], ...Object.entries(WHEN)]);
+  seg(document.getElementById('f-work'), 'work', [['all', 'All'], ['has', 'Started'], ['ready', 'Ready'], ['pr', 'PRs'], ['follow', FOLLOW.replace(/^For /, '')]]);
+}
+function matches(it) {
+  const d = state.decisions[it.id]?.decision, p = state.progress[it.id];
+  if (state.area !== 'all' && it.area !== state.area) return false;
+  if (state.when !== 'all' && it.horizon !== state.when) return false;
+  if (state.status === 'open' && d) return false;
+  if (['do', 'skip', 'park'].includes(state.status) && d !== state.status) return false;
+  if (state.work === 'has' && !p) return false;
+  if (state.work === 'ready' && !(p && ['ready', 'pr', 'merged'].includes(p.status))) return false;
+  if (state.work === 'pr' && !(p && p.pr)) return false;
+  if (state.work === 'follow' && !(p && p.followUp)) return false;
+  return true;
+}
+const PR_STATE = { open: 'Open', draft: 'Draft', merged: 'Merged', closed: 'Closed' };
+function prHtml(pr) {
+  const u = pr && safeUrl(pr.url); if (!u) return '';
+  const s = PR_STATE[pr.state] ? pr.state : 'open';
+  return `<a class="pr ${s}" href="${esc(u)}" target="_blank" rel="noopener" aria-label="Pull request${pr.number ? ' ' + esc(pr.number) : ''}, ${PR_STATE[s]}"><i></i>PR${pr.number ? ' #' + esc(pr.number) : ''} · ${PR_STATE[s]} ↗</a>`;
+}
+function progressHtml(id) {
+  const p = state.progress[id]; if (!p) return '';
+  const [label, tone] = PSTATUS[p.status] || PSTATUS.note;
+  const links = (p.links || []).map((l) => { const u = safeUrl(l && l.url); return u ? `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(l.label || u)} ↗</a></li>` : ''; }).join('');
+  return `<div class="progress"><div class="p-head"><span class="status ${tone}"><i></i>${label}</span>${prHtml(p.pr)}${p.branch ? `<span class="branch">${esc(p.branch)}</span>` : ''}${p.updated ? `<span class="saved">${esc(p.updated)}</span>` : ''}</div>
+    ${p.summary ? `<div>${esc(p.summary)}</div>` : ''}
+    ${p.test ? `<div><p class="sub">How to test</p>${esc(p.test)}</div>` : ''}
+    ${links ? `<ul>${links}</ul>` : ''}
+    ${p.followUp ? `<div class="followup"><p class="sub">${esc(FOLLOW)}</p>${esc(p.followUp)}</div>` : ''}</div>`;
+}
+function itemEl(it) {
+  const d = state.decisions[it.id] || {};
+  const el = document.createElement('article'); el.className = 'item' + (d.decision ? ' d-' + d.decision : ''); el.id = 'item-' + it.id;
+  el.innerHTML = `<div class="iid">${esc(it.id)}</div><div class="body">
+    <h3>${esc(it.title)}</h3>
+    <div class="tags">${it.horizon && WHEN[it.horizon] ? `<span class="tag">${esc(WHEN[it.horizon])}</span>` : ''}${it.size ? `<span class="tag">${SIZE[it.size] || esc(it.size)}</span>` : ''}${it.owner ? `<span class="tag">${esc(it.owner)}</span>` : ''}</div>
+    <p class="summary">${esc(it.summary)}</p>
+    ${it.actions?.length ? `<div><p class="sub">What to do</p><ul class="actions">${it.actions.map((a) => `<li>${esc(a)}</li>`).join('')}</ul></div>` : ''}
+    ${it.quotes?.length ? `<details class="quotes"><summary>From the source (${it.quotes.length})</summary>${it.quotes.map((q) => `<blockquote><p>“${esc(q.text)}”</p><cite>${esc(q.who)}</cite></blockquote>`).join('')}</details>` : ''}
+    ${it.recommendation ? `<p class="rec">Suggested: <strong>${LABEL[it.recommendation.decision]}</strong>. ${esc(it.recommendation.reason)}</p>` : ''}
+    ${progressHtml(it.id)}
+    <div class="decide"><div class="seg" role="group" aria-label="Decision for ${esc(it.id)}">${['do', 'park', 'skip'].map((v) => `<button type="button" data-v="${v}" aria-pressed="${d.decision === v}">${LABEL[v]}</button>`).join('')}</div>
+      <textarea id="note-${esc(it.id)}" aria-label="Note for ${esc(it.id)}" placeholder="Add context or change the scope (optional)">${esc(d.comment)}</textarea>
+      <div class="saved" id="saved-${esc(it.id)}"></div></div></div>`;
+  el.querySelectorAll('.decide .seg button').forEach((b) => b.onclick = () => {
+    const cur = state.decisions[it.id]?.decision, v = cur === b.dataset.v ? null : b.dataset.v;
+    save(it.id, { decision: v, comment: el.querySelector('textarea').value });
+    el.className = 'item' + (v ? ' d-' + v : '');
+    el.querySelectorAll('.decide .seg button').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.v === v)));
+    toast(v ? `${it.id}: ${LABEL[v]}` : `${it.id}: cleared`); renderTally(); renderMap();
+  });
+  const ta = el.querySelector('textarea'); let t;
+  ta.oninput = () => { mark(it.id, 'Typing…'); clearTimeout(t); t = setTimeout(() => commit(it.id, ta.value), 900); };
+  ta.onblur = () => { clearTimeout(t); commit(it.id, ta.value); };
+  return el;
+}
+function commit(id, value) { const cur = state.decisions[id] || {}; if ((cur.comment || '') === value) { mark(id, cur.updatedAt ? 'Saved' : ''); return; } save(id, { comment: value, decision: cur.decision || null }); }
+function renderTally() {
+  const c = { do: 0, skip: 0, park: 0 }; ITEMS.forEach((i) => { const d = state.decisions[i.id]?.decision; if (d) c[d]++; });
+  document.getElementById('undecided').textContent = ITEMS.length - c.do - c.skip - c.park;
+  ['do', 'park', 'skip'].forEach((k) => document.getElementById('c-' + k).textContent = c[k]);
+  const ready = ITEMS.filter((i) => ['ready', 'pr', 'merged'].includes(state.progress[i.id]?.status)).length;
+  document.getElementById('board-stats').textContent = `${ITEMS.length} items · ${c.do} to do · ${ready} ready`;
+}
+function renderMap() {
+  const map = document.getElementById('map'); map.innerHTML = '';
+  AREAS.forEach((a) => {
+    const items = ITEMS.filter((i) => i.area === a.id); if (!items.length) return;
+    const row = document.createElement('div'); row.className = 'map-row';
+    row.innerHTML = `<div class="map-label">${esc(a.name)}</div><div class="tiles"></div>`;
+    items.forEach((i) => {
+      const d = state.decisions[i.id]?.decision, p = state.progress[i.id]?.status, tone = p ? (PSTATUS[p] || PSTATUS.note)[1] : '';
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'tile' + (d ? ' d-' + d : '');
+      b.innerHTML = `${esc(i.id)}${tone ? `<span class="p ${tone}"></span>` : ''}`;
+      b.setAttribute('aria-label', `${i.id}, ${i.title}${d ? ', ' + LABEL[d] : ', undecided'}`); b.title = i.title;
+      b.onclick = () => { state.area = 'all'; state.status = 'all'; state.when = 'all'; state.work = 'all'; renderFilters(); renderList(); document.getElementById('item-' + i.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+      row.querySelector('.tiles').appendChild(b);
+    });
+    map.appendChild(row);
+  });
+}
+function renderList() {
+  const list = document.getElementById('list'), focused = document.activeElement?.id; list.innerHTML = ''; let n = 0;
+  AREAS.forEach((a) => {
+    const items = ITEMS.filter((i) => i.area === a.id && matches(i)); if (!items.length) return; n += items.length;
+    const s = document.createElement('section'); s.className = 'area';
+    s.innerHTML = `<div class="area-head"><h2>${esc(a.name)}</h2><span class="n">${items.length}</span></div>${a.blurb ? `<p class="area-blurb">${esc(a.blurb)}</p>` : ''}`;
+    items.forEach((i) => s.appendChild(itemEl(i))); list.appendChild(s);
+  });
+  if (!n) list.innerHTML = '<p class="empty">No items match these filters.</p>';
+  renderTally(); renderMap();
+  if (focused) document.getElementById(focused)?.focus();
+}
+
+// Theme: two modes, starting from the system setting; the switch flips it for this visit.
+const themeSwitch = document.getElementById('theme-switch');
+function setTheme(dark) { document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light'); themeSwitch.setAttribute('aria-checked', String(dark)); }
+setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
+themeSwitch.onclick = () => setTheme(themeSwitch.getAttribute('aria-checked') !== 'true');
+
+document.getElementById('t-name').textContent = DATA.title;
+const by = DATA.author, byUrl = safeUrl(by?.url);
+if (by?.name) document.getElementById('credit').innerHTML = `Run by ${byUrl ? `<a href="${esc(byUrl)}" target="_blank" rel="noopener">${esc(by.name)}</a>` : esc(by.name)} · made with <code>a8c-design:feedback-triage</code>`;
+document.getElementById('t-intro-1').textContent = DATA.intro || '';
+const src = DATA.source || {};
+document.getElementById('t-meta').textContent = [src.kind, src.label, src.date, (src.people || []).join(' and ')].filter(Boolean).join(' · ');
+const gen = document.getElementById('general-note'); let gt;
+gen.oninput = () => { mark('GENERAL', 'Typing…'); clearTimeout(gt); gt = setTimeout(() => commit('GENERAL', gen.value), 900); };
+gen.onblur = () => { clearTimeout(gt); commit('GENERAL', gen.value); };
+
+Object.assign(state.decisions, lsRead());
+if (state.decisions.GENERAL) gen.value = state.decisions.GENERAL.comment || '';
+renderFilters(); renderList();
+
+// Without the shared store, decisions live in this browser until the user hands them
+// back. The export has one entry per item (null when undecided) plus GENERAL, in the
+// same shape as the store's decisions docs, so the agent reads either the same way.
+function exportDecisions() {
+  const decisions = {};
+  [...ITEMS.map((i) => i.id), 'GENERAL'].forEach((id) => {
+    const d = state.decisions[id] || {};
+    if (id === 'GENERAL' && !d.comment) return;
+    decisions[id] = { decision: d.decision || null, comment: d.comment || '', title: byId(id)?.title || 'General notes', updatedAt: d.updatedAt || null };
+  });
+  return JSON.stringify({ triage: DATA.slug || null, title: DATA.title, exportedAt: new Date().toISOString(), decisions }, null, 2);
+}
+function downloadDecisions() {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([exportDecisions()], { type: 'application/json' }));
+  a.download = (DATA.slug || 'triage') + '-decisions.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  toast('Downloaded');
+}
+async function copyDecisions() {
+  try { await navigator.clipboard.writeText(exportDecisions()); toast('Copied. Paste it into your chat.'); }
+  catch (e) { if (window.claude) toast('Could not copy. Try again.'); else downloadDecisions(); }
+}
+function showBanner(html, withExport) {
+  const banner = document.getElementById('banner');
+  banner.hidden = false;
+  // The Artifact viewer blocks downloads, so there the export is Copy only.
+  const canDownload = !window.claude;
+  banner.innerHTML = html + (withExport ? '<div class="banner-actions"><button type="button" id="copy-decisions">Copy decisions</button>' + (canDownload ? '<button type="button" id="download-decisions">Download</button>' : '') + '</div>' : '');
+  if (withExport) { document.getElementById('copy-decisions').onclick = copyDecisions; if (canDownload) document.getElementById('download-decisions').onclick = downloadDecisions; }
+}
+
+(async () => {
+  try { db = window.claude?.use ? await window.claude.use('db') : null; } catch (e) { db = null; }
+  if (!db) { showBanner('<strong>Not syncing.</strong> Your choices are kept in this browser. When you\'re done, copy them and paste them into your chat, or download the file and tell the agent where it is.', true); return; }
+  db.collection('progress').onSnapshot((snap) => {
+    state.progress = {}; snap.docs.forEach((d) => { const v = d.data(); if (v) state.progress[d.id] = v; });
+    if (document.activeElement?.tagName !== 'TEXTAREA') renderList();
+  }, () => {});
+  db.collection('decisions').onSnapshot((snap) => {
+    const editing = document.activeElement?.tagName === 'TEXTAREA' ? document.activeElement.id : null;
+    snap.docs.forEach((d) => { const v = d.data(); if (!v) return; if (editing === 'note-' + d.id || (d.id === 'GENERAL' && editing === 'general-note')) return; state.decisions[d.id] = { decision: v.decision || null, comment: v.comment || '', updatedAt: v.updatedAt }; });
+    if (!editing) renderList();
+    if (state.decisions.GENERAL && editing !== 'general-note') gen.value = state.decisions.GENERAL.comment || '';
+  }, () => showBanner('<strong>Lost the connection.</strong> Reload the page to keep saving, or copy your choices so they aren\'t lost.', true));
+})();
+</script>
