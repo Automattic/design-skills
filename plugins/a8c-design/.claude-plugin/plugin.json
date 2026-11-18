@@ -1,7 +1,7 @@
 {
   "name": "a8c-design",
-  "version": "2.0.1",
-  "description": "Reusable skills for product copy and HTML/CSS design mockups",
+  "version": "2.1.0",
+  "description": "Reusable skills for product copy, design tokens, mockups, voiceover scripts, and WordPress design system updates",
   "author": {
     "name": "Noam Almosnino",
     "email": "noam.almosnino@automattic.com"
@@ -10,7 +10,10 @@
   "skills": [
     "./skills/jtbd-copy",
     "./skills/design-mockups",
-    "./skills/wordpress-mockups"
+    "./skills/wordpress-mockups",
+    "./skills/design-tokens",
+    "./skills/voiceover-scriptwriting",
+    "./skills/wpds-changes"
   ],
   "commands": []
 }

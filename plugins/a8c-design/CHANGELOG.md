@@ -5,6 +5,19 @@ All notable changes to the `a8c-design` plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-11-18
+
+### Added
+
+- `design-tokens` with its token templates, reference guides, and Python validator.
+- `voiceover-scriptwriting` with its reference guides and duration and normalization scripts.
+- `wpds-changes` for summaries of public WordPress design system activity.
+
+### Changed
+
+- Document requirements and installation for all six public skills.
+- Keep the existing public `jtbd-copy` name for the internal `product-jtbd-copy` workflow.
+
 ## [2.0.1] - 2026-11-18
 
 ### Fixed

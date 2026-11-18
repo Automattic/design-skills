@@ -50,7 +50,10 @@ def validate(root, tag=None):
     for file in root.rglob('*.md'):
         if '.git' in file.relative_to(root).parts or 'dist' in file.relative_to(root).parts:
             continue
-        for destination in re.findall(r'\]\(([^)]+)\)', file.read_text()):
+        text = file.read_text()
+        text = re.sub(r'(?ms)^ {0,3}(`{3,}|~{3,})[^\n]*\n.*?^ {0,3}\1[ \t]*$', '', text)
+        text = re.sub(r'(`+).*?\1', '', text, flags=re.DOTALL)
+        for destination in re.findall(r'\]\(([^)]+)\)', text):
             if re.match(r'^(?:[a-zA-Z][a-zA-Z0-9+.-]*:|#|//)', destination):
                 continue
             target = destination.split('#')[0]

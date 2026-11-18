@@ -7,6 +7,9 @@ Reusable design skills maintained by Automattic. Each skill includes instruction
 | [jtbd-copy](plugins/a8c-design/skills/jtbd-copy/SKILL.md) | Review and rewrite copy through a Jobs to Be Done lens | User-provided copy or a flow description |
 | [design-mockups](plugins/a8c-design/skills/design-mockups/SKILL.md) | Explore HTML/CSS designs in a local gallery | File access, a terminal, Node.js 20+, npm, and a browser |
 | [wordpress-mockups](plugins/a8c-design/skills/wordpress-mockups/SKILL.md) | Build WordPress UI mockups using bundled tokens, icons, and components | Ability to read the bundled files and create HTML |
+| [design-tokens](plugins/a8c-design/skills/design-tokens/SKILL.md) | Create and validate design tokens, themes, and platform outputs | File access and Python 3 for validation; Node.js/npm for optional builds |
+| [voiceover-scriptwriting](plugins/a8c-design/skills/voiceover-scriptwriting/SKILL.md) | Write, normalize, and time narration scripts | Python 3.10+ for bundled checks; provider access for optional audio generation |
+| [wpds-changes](plugins/a8c-design/skills/wpds-changes/SKILL.md) | Summarize public WordPress design system activity | Web/GitHub search and access to the current date |
 
 ## Install
 
