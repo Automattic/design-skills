@@ -210,5 +210,5 @@ On platforms with no filesystem (pasting into a web assistant, for example), the
 
 ## Where this came from
 
-The design writing team’s [research into AI video voiceover best practices](https://designwritingteam.wordpress.com/2026/10/20/ai-video-voiceovers-researching-best-practices/), covering word budgets and the hook window, loop mechanics and platform grammars, the per-scene generation pipeline, and each provider’s direction syntax. Companion kit: **agentic-ux-copy**, for interface copy — same architecture, different medium.
+The design writing team’s research into AI video voiceover best practices, covering word budgets and the hook window, loop mechanics and platform grammars, the per-scene generation pipeline, and each provider’s direction syntax.
 

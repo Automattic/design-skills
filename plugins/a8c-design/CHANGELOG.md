@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.0] - 2026-11-18
 
+### Fixed
+
+- Keep the voiceover research attribution as plain text and remove the reference to an unavailable companion skill.
+
 ### Added
 
 - `design-tokens` with its token templates, reference guides, and Python validator.
